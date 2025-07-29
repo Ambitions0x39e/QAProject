@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Query Result</title>
+    <meta charset="utf-8">
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 8px;
+        }
+        .container {
+            display: flex;
+            gap: 40px;
+            margin-top: 20px;
+        }
+        .column {
+            flex: 1;
+        }
+        h2 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Query Interface</h1>
+    <form method="get">
+        <label>Query string: <input type="text" name="q" required></label><br>
+        <label>Amount: <input type="number" name="q_amount" required></label><br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <div class="container">
+        {% if results_tfidf %}
+        <div class="column">
+            <h2>TF-IDF Results</h2>
+            <table>
+                <tr>
+                    <th>Description</th>
+                    <th>Similarity</th>
+                </tr>
+                {% for r in results_tfidf %}
+                <tr>
+                    <td>{{ r.desc }}</td>
+                    <td>{{ r.similarity }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% endif %}
+        {% if results_jaccard %}
+        <div class="column">
+            <h2>Jaccard Results</h2>
+            <table>
+                <tr>
+                    <th>Description</th>
+                    <th>Similarity</th>
+                </tr>
+                {% for r in results_jaccard %}
+                <tr>
+                    <td>{{ r.desc }}</td>
+                    <td>{{ r.similarity }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% endif %}
